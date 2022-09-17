@@ -16,13 +16,19 @@ std::string convToLower(std::string src)
 std::set<std::string> parseStringToWords(string rawWords)
 {
 
-
-
-
-
-
-
-
+  set<string> w;
+  int count = 0; //keep track of how many punctuations there are
+  string temp;
+  int start = 0;
+  for(int i=0; i<rawWords.size(); i++){
+      if(!isalpha(rawWords[i])){
+          //if not a letter, increase count
+          count++;
+          temp = rawWords.substr(start,i-start+1);
+          start = i + 1;
+          w.insert(temp);
+      }
+  }
 
 
 }
