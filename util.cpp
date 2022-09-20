@@ -15,22 +15,30 @@ std::string convToLower(std::string src)
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
-
   set<string> w;
   int count = 0; //keep track of how many punctuations there are
   string temp;
-  int start = 0;
-  for(int i=0; i<rawWords.size(); i++){
+  int start = 0; //keep track of where to start for substring 
+  for(unsigned int i=0; i<rawWords.size(); i++){
       if(!isalpha(rawWords[i])){
-          //if not a letter, increase count
-          count++;
-          temp = rawWords.substr(start,i-start+1);
-          start = i + 1;
-          w.insert(temp);
+          temp = rawWords.substr(start,count);
+          if(temp.size() >=2){
+            w.insert(temp);
+          }
+          start = i+1;
+          count = 0;
+          //continue;
       }
+      else if(i == rawWords.size()-1){
+        temp = rawWords.substr(start,count+1);
+        w.insert(temp);
+      }
+      else{
+        count++;
+      }
+      
   }
-
-
+  return w;
 }
 
 /**************************************************
@@ -61,3 +69,16 @@ std::string &rtrim(std::string &s) {
 std::string &trim(std::string &s) {
     return ltrim(rtrim(s));
 }
+
+//testing parseStringToWords()
+/*int main(int argc, char* argv[]){
+
+    set<string> test = parseStringToWords("h'uhuh'ok.weird");
+    for (auto it = test.begin(); it !=test.end(); ++it)
+    {
+        cout << *it << endl;
+    }
+
+
+    return 0;
+}*/
