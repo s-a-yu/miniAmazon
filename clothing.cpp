@@ -24,12 +24,12 @@ set<string> Clothing::keywords() const{
 
 string Clothing::displayString() const{
   string all;
-  string price;
-  price = to_string(price_);
-  all = name_ + "\n" + "Size: " + size_ + " Brand: " + brand_ + "\n" + price + to_string(qty_) + "left.";
+  stringstream ss;
+  ss << name_ << "\n" <<"Size: " << size_ << " Brand: " << brand_ <<"\n" << fixed << setprecision(2) <<price_ <<"\n" <<qty_ << " left."<< "\n";
+  all = ss.str();
   return all;
 }
 
 void Clothing::dump(ostream& os) const{
-  os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << size_ << "\n" << brand_; 
+  os << category_ << "\n" << name_ << "\n" << fixed << setprecision(2) << price_ << "\n" << qty_ << "\n" << size_ << "\n" << brand_ << "\n"; 
 }

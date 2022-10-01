@@ -24,12 +24,14 @@ set<string> Movies::keywords() const{
 
 string Movies::displayString() const{
   string all;
-  string price;
-  price = to_string(price_);
-  all = name_ + "\n" + "Genre: " + genre_ + " Rating: " + rating_ + "\n" + price + to_string(qty_) + "left.";
+  stringstream ss;
+  //all = name_ + "\n" + "Genre: " + genre_ + " Rating: " + rating_ + "\n" + price + + "\n" + to_string(qty_) + " left.";
+
+  ss << name_ << "\n" <<"Genre: " << genre_ << " Rating:" << rating_ <<"\n" << fixed << setprecision(2) <<price_ <<"\n" <<qty_ << " left."<< "\n";
+  all = ss.str();
   return all;
 }
 
 void Movies::dump(ostream& os) const{
-  os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << genre_ << "\n" << rating_; 
+  os << category_ << "\n" << name_ << "\n" << fixed << setprecision(2) << price_ << "\n" << qty_ << "\n" << genre_ << "\n" << rating_ << "\n"; 
 }

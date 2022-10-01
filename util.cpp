@@ -23,14 +23,15 @@ std::set<std::string> parseStringToWords(string rawWords)
       if(!isalpha(rawWords[i])){
           temp = rawWords.substr(start,count);
           if(temp.size() >=2){
+            temp = convToLower(temp);
             w.insert(temp);
           }
           start = i+1;
           count = 0;
-          //continue;
       }
       else if(i == rawWords.size()-1){
         temp = rawWords.substr(start,count+1);
+        temp = convToLower(temp);
         w.insert(temp);
       }
       else{

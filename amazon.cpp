@@ -5,10 +5,13 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
+#include <map>
 #include "product.h"
 #include "db_parser.h"
 #include "product_parser.h"
 #include "util.h"
+#include "datastore.h"
+#include "mydatastore.h"
 
 using namespace std;
 struct ProdNameSorter {
@@ -29,7 +32,7 @@ int main(int argc, char* argv[])
      * Declare your derived DataStore object here replacing
      *  DataStore type to your derived type
      ****************/
-    DataStore ds;
+    myDataStore ds;
 
 
 
@@ -100,9 +103,37 @@ int main(int argc, char* argv[])
                 done = true;
             }
 	    /* Add support for other commands here */
-
-
-
+      //if input username run it and what they want to add
+      //else invalid request 
+            else if ( cmd == "ADD"){
+              string username;
+              unsigned int search_hit_number;
+              while(ss >> username >> search_hit_number){
+                username = convToLower(username);
+                if(search_hit_number <= hits.size()){
+                  //index is valid 
+                  ds.addCart(username, hits[search_hit_number-1]);
+                }
+                else{
+                  //hist index is not valid
+                  cout << "Invalid request" << endl;
+                }
+              }
+            }
+            else if (cmd == "VIEWCART"){
+              string username;
+              while(ss >> username){
+                username = convToLower(username);
+                ds.viewCart(username);
+              }
+            }
+            else if (cmd == "BUYCART"){
+              string username;
+              while(ss >> username){
+                username = convToLower(username);
+                ds.buyCart(username);
+              }
+            }
 
             else {
                 cout << "Unknown command" << endl;

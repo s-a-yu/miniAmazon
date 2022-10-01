@@ -25,12 +25,13 @@ set<string> Book::keywords() const{
 
 string Book::displayString() const{
   string all;
-  string price;
-  price = to_string(price_);
-  all = name_ + "\n" + "Author: " + author_ + " ISBN:" + ISBN_ + "\n" + price + to_string(qty_) + "left.";
+  stringstream ss;
+
+  ss << name_ << "\n" <<"Author: " << author_ << " ISBN:" << ISBN_ <<"\n" << fixed << setprecision(2) <<price_ <<"\n" <<qty_ << " left."<<"\n";
+  all = ss.str();
   return all;
 }
 
 void Book::dump(ostream& os) const{
-  os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << ISBN_ << "\n" << author_; 
+  os << category_ << "\n" << name_ << "\n"<< fixed << setprecision(2) << price_ << "\n" << qty_ << "\n" << ISBN_ << "\n" << author_ << "\n"; 
 }
