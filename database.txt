@@ -6,6 +6,12 @@ Data Abstraction & Problem Solving with C++
 978-013292372-9
 Carrano and Henry
 book
+C++ Data Problem
+80.00
+30
+978-918739438-8
+Stephanie Yu
+book
 Great Men and Women of Troy
 19.50
 5
