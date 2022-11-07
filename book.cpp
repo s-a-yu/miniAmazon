@@ -27,7 +27,7 @@ string Book::displayString() const{
   string all;
   stringstream ss;
 
-  ss << name_ << "\n" <<"Author: " << author_ << " ISBN:" << ISBN_ <<"\n" << fixed << setprecision(2) <<price_ <<"\n" <<qty_ << " left."<<"\n";
+  ss << name_ << "\n" <<"Author: " << author_ << " ISBN: " << ISBN_ <<"\n" << fixed << setprecision(2) <<price_ <<" " <<qty_ << " left."<<"\n";
   all = ss.str();
   return all;
 }

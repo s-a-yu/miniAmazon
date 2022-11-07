@@ -13,7 +13,7 @@ myDataStore::myDataStore(){
 //adds a product to the data store
 void myDataStore::addProduct(Product* p){
   products.push_back(p); //add p to vector storing pointers to products
-  
+
   //check keywords associated with p
   set<string> pKeywords = p -> keywords();
   
@@ -83,34 +83,41 @@ void myDataStore::dump(ostream& ofile){
 
 void myDataStore::addCart(string username, Product* p){
   for(map<string, User*>:: iterator it = userProfile.begin(); it != userProfile.end(); ++it){
-    if(userProfile.find(it->first) != userProfile.end()){
+    if(userProfile.find(username) != userProfile.end()){
       //username exists
       carts[username].push_back(p);
       break;
     }
     else{
       cout << "Invalid request" << endl;
+      break;
     }
   }
   
 }
 
 void myDataStore::viewCart(string username){
+  if (userProfile.find(username) == userProfile.end()) {
+    // NOT A VALID USER!!!
+    cout<< "Invalid username" << endl;
+    return; 
+  }
+  
   int count = 1;
   for(map<string, vector<Product*>> ::iterator it = carts.begin(); it!= carts.end(); ++it){
     if(carts.find(username) != carts.end()){
     //username exists
       map<string, vector<Product*>> :: iterator it = carts.find(username);
-      for(vector<Product*>::iterator It2 = it->second.begin(); It2 != it->second.end(); ++It2){
-        cout << count << endl;
-        cout <<(*It2)->displayString()<<endl;
-        //it++;
+      for(vector<Product*>::iterator It2 = (it->second).begin(); It2 != (it->second).end(); ++It2){
+        cout << "Item " << count << endl;
+        cout << (*It2)->displayString()<<endl;
         count ++;
       }
-      //return;
+      break;
     }
     else{
       cout<< "Invalid username" <<endl;
+      break;
     }
   }
 
@@ -122,6 +129,7 @@ void myDataStore::buyCart(string username){
   if (userProfile.find(username) == userProfile.end()) {
     // NOT A VALID USER!!!
     cout<< "Invalid username" << endl;
+    return; 
   }
 
   User* currUser = userProfile[username];

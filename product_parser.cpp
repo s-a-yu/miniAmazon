@@ -3,7 +3,7 @@
 #include "product_parser.h"
 #include "book.h"
 #include "clothing.h"
-#include "movies.h"
+#include "movie.h"
 #include "util.h"
 using namespace std;
 
@@ -244,7 +244,7 @@ std::string ProductMovieParser::categoryID()
  */
 Product* ProductMovieParser::makeProduct()
 {
-  Product* m = new Movies(categoryID(), prodName_, price_, qty_, genre_, rating_);
+  Product* m = new Movie(categoryID(), prodName_, price_, qty_, genre_, rating_);
   return m;
 
 }
