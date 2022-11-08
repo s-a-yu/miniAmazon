@@ -10,6 +10,19 @@ using namespace std;
 
 myDataStore::myDataStore(){
 }
+//destructor 
+myDataStore::~myDataStore(){
+  //deleting products
+  for(vector<Product*>::iterator it = products.begin(); it != products.end(); ++it){
+    delete *it; 
+  }
+  //deleting users
+  for(map<string, User*>::iterator it = userProfile.begin(); it != userProfile.end(); ++it){
+    delete it -> second;
+  }
+
+  
+}
 //adds a product to the data store
 void myDataStore::addProduct(Product* p){
   products.push_back(p); //add p to vector storing pointers to products
@@ -72,13 +85,16 @@ void myDataStore::dump(ostream& ofile){
   ofile << "<products>" << endl;
   for(vector<Product*>:: iterator it = products.begin(); it != products.end(); ++it){
     (*it)->dump(ofile);
+    //delete *it;
   }
   ofile << "</products>" << endl;
   ofile<< "<users>" << endl;
   for(vector<User*>:: iterator it = users.begin(); it != users.end(); ++it){
     (*it)->dump(ofile);
+    //delete *it;
   }
   ofile << "</users>"<< endl;
+
 }
 
 void myDataStore::addCart(string username, Product* p){
